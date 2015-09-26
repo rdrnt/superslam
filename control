@@ -1,0 +1,9 @@
+Package: rdrnt
+Name: Superslam
+Depends: mobilesubstrate
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: Make Champ appear with activator!
+Maintainer: rdrnt
+Author: rdrnt
+Section: Tweaks

@@ -1,0 +1,10 @@
+Package: rdrnt
+Name: Superslam
+Depends: mobilesubstrate
+Architecture: iphoneos-arm
+Description: An awesome MobileSubstrate tweak!
+Maintainer: rdrnt
+Author: rdrnt
+Section: Tweaks
+Version: 0.0.1-16
+Installed-Size: 1204
