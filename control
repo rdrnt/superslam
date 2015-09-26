@@ -7,3 +7,4 @@ Description: Make Champ appear with activator!
 Maintainer: rdrnt
 Author: rdrnt
 Section: Tweaks
+Depends: activator, mobilesubstrate
