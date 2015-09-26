@@ -33,7 +33,7 @@
 	cenaImage.center = cenaWindow.center;
 	cenaWindow.backgroundColor = [UIColor clearColor];
 	cenaImage = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:@"/Library/Application Support/Superslam/cena.png"]];
-	[cenaWindow makeKeyAndVisible];
+	cenaWindow.hidden = NO;
 	[cenaWindow addSubview: cenaImage];	
 	[cenaWindow addGestureRecognizer:tap];
 }
