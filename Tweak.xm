@@ -20,13 +20,22 @@
 - (void)activator:(LAActivator *)activator receiveEvent:(LAEvent *)event {
 	//tap
 	tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(noMoreCena)];
+
+	//remove it, just incase triggered twice (thx willysun)
+	cenaWindow.alpha = 0;
+	cenaImage.alpha = 0;
+	[cenaWindow removeFromSuperview];
+	[cenaImage removeFromSuperview];
+	[audioPlayer stop];
+
 	
 
 	//John Cena Audio
 	audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:nil];
 	audioPlayer.numberOfLoops = 0;
 	audioPlayer.volume = 1;
-	[audioPlayer play];
+
+	[event setHandled:YES];
 
 	//imaginary window and image
 	cenaWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -36,13 +45,18 @@
 	cenaWindow.hidden = NO;
 	[cenaWindow addSubview: cenaImage];	
 	[cenaWindow addGestureRecognizer:tap];
+	[audioPlayer play];
+
 }
 
 //method to remove Mr. Cena
 -(void)noMoreCena {
 	cenaWindow.alpha = 0;
+	cenaImage.alpha = 0;
+	[cenaWindow removeFromSuperview];
 	[cenaImage removeFromSuperview];
 	[audioPlayer stop];
+	
 }
 
 - (NSString *)activator:(LAActivator *)activator requiresLocalizedTitleForListenerName:(NSString *)listenerName {
