@@ -1,12 +1,9 @@
-ARCHS = armv7 arm64
-THEOS_BUILD_DIR = Packages
+include $(THEOS)/makefiles/common.mk
 
-include theos/makefiles/common.mk
-
-TWEAK_NAME = Superslam
-Superslam_FILES = Tweak.xm
-Superslam_FRAMEWORKS = UIKit AudioToolbox AVFoundation
-Superslam_LIBRARIES = activator
+TWEAK_NAME = superslam12
+superslam12_FILES = Tweak.xm
+superslam12_FRAMEWORKS = UIKit AVFoundation AudioToolbox
+superslam12_LIBRARIES = activator
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 

@@ -1,10 +1,9 @@
-Package: rdrnt
-Name: Superslam
+Package: com.sh0rtflow.superslam12
+Name: Superslam12
 Depends: mobilesubstrate
-Version: 0.0.1
+Version: 1.3
 Architecture: iphoneos-arm
-Description: Make Champ appear with activator!
-Maintainer: rdrnt
-Author: rdrnt
+Description: Make John Cena appear with activator.
+Maintainer: sh0rtflow
+Author: sh0rtflow
 Section: Tweaks
-Depends: mobilesubstrate
