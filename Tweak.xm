@@ -1,13 +1,15 @@
+
 #import <SpringBoard/SpringBoard.h>
+#import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioServices.h>
 #import <libactivator/libactivator.h>
-#import <AVFoundation/AVFoundation.h>
 
 
-    	AVAudioPlayer *audioPlayer;
+
       UITapGestureRecognizer *tap;
       UIImageView *cenaImage;
     	UIWindow *cenaWindow;
+      AVAudioPlayer *audioPlayer;
 
 
 
@@ -16,8 +18,10 @@
     	NSString *soundPath = [[NSBundle bundleWithPath:@"/Library/Application Support/Superslam/"] pathForResource:@"johncena" ofType:@"caf"];
     	NSURL *soundURL = [[NSURL alloc] initFileURLWithPath:soundPath];
 
+
+
       @interface Superslam12Activator :  NSObject <LAListener>
-       -(void)removeCena;
+       -(void)noMoreCena;
       @end
 
 
@@ -27,16 +31,17 @@
       - (void)activator:(LAActivator *)activator receiveEvent:(LAEvent *)event {
 
 
-      	tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeCena)];
+        // remove cena on tap
+      	tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(noMoreCena)];
 
 
 
         //Remove Cena from Screen - If triggered two times
-        [audioPlayer stop];
+        cenaWindow.alpha = 0;
+        cenaImage.alpha = 0;
         [cenaWindow removeFromSuperview];
         [cenaImage removeFromSuperview];
-        cenaImage.alpha = 0;
-      	cenaWindow.alpha = 0;
+        [audioPlayer stop];
 
 
 
@@ -63,31 +68,41 @@
 
       }
 
+
+
+
+      //remove Cena from screen function
+      - (void)noMoreCena {
+        cenaWindow.alpha = 0;
+        cenaImage.alpha = 0;
+        [cenaWindow removeFromSuperview];
+        [cenaImage removeFromSuperview];
+        [audioPlayer stop];
+      }
+
+
+
+
+
       //Activator labels and so on...
 
       - (NSString *)activator:(LAActivator *)activator requiresLocalizedTitleForListenerName:(NSString *)listenerName {
-      	return @"Superslam";
+      	return @"Superslam12";
       }
       - (NSString *)activator:(LAActivator *)activator requiresLocalizedDescriptionForListenerName:(NSString *)listenerName {
-      	return @"Make Champ appear!";
+      	return @"Make John Cena appear!";
       }
       - (NSArray *)activator:(LAActivator *)activator requiresCompatibleEventModesForListenerWithName:(NSString *)listenerName {
       	return [NSArray arrayWithObjects:@"springboard", nil];
       }
 
+
+
       + (void)load {
-      	[[LAActivator sharedInstance] registerListener:[self new] forName:@"com.rdurant.Superslam"];
+      	[[LAActivator sharedInstance] registerListener:[self new] forName:@"com.sh0rtflow.Superslam12"];
       }
 
 
 
-      //remove Cena from screen function
-      -(void)removeCena {
-      	[audioPlayer stop];
-      	[cenaWindow removeFromSuperview];
-      	[cenaImage removeFromSuperview];
-        cenaWindow.alpha = 0;
-        cenaImage.alpha = 0;
-      }
 
       @end
