@@ -1,9 +1,9 @@
-Package: com.sh0rtflow.superslam12
+Package: me.memor1es.superslam12
 Name: Superslam12
 Depends: mobilesubstrate
 Version: 1.3.2
 Architecture: iphoneos-arm
 Description: Make John Cena appear on your home screen
-Maintainer: sh0rtflow <sh0rtflowdevelopment@gmail.com>
-Author: sh0rtflow <sh0rtflowdevelopment@gmail.com>
+Maintainer: Memor1es <memories@tw3lve.space>
+Author: Memor1es <memories@tw3lve.space>
 Section: Tweaks

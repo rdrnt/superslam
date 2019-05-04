@@ -1,20 +1,18 @@
-
+//import needed headers
 #import <SpringBoard/SpringBoard.h>
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioServices.h>
 #import <libactivator/libactivator.h>
 
 
-
+      //declare needed variables
       UITapGestureRecognizer *tap;
       UIImageView *cenaImage;
     	UIWindow *cenaWindow;
-      AVAudioPlayer *audioPlayer;
+      AVAudioPlayer *player;
 
 
-
-
-
+      //Sound paths
     	NSString *soundPath = [[NSBundle bundleWithPath:@"/Library/Application Support/Superslam/"] pathForResource:@"johncena" ofType:@"caf"];
     	NSURL *soundURL = [[NSURL alloc] initFileURLWithPath:soundPath];
 
@@ -25,31 +23,19 @@
       @end
 
 
-
-
+      //do when activator gesture is used
       @implementation Superslam12Activator
       - (void)activator:(LAActivator *)activator receiveEvent:(LAEvent *)event {
 
 
-        // remove cena on tap
+        //function to be executed when user tapped on the screen
       	tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(noMoreCena)];
 
 
-
-        //Remove Cena from Screen - If triggered two times
-        cenaWindow.alpha = 0;
-        cenaImage.alpha = 0;
-        [cenaWindow removeFromSuperview];
-        [cenaImage removeFromSuperview];
-        [audioPlayer stop];
+        [self noMoreCena];
 
 
-
-
-
-
-      	//add cena + audio
-
+        //show cena
       	cenaWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
       	cenaImage.center = cenaWindow.center;
       	cenaWindow.backgroundColor = [UIColor clearColor];
@@ -57,11 +43,12 @@
       	cenaWindow.hidden = NO;
       	[cenaWindow addSubview: cenaImage];
       	[cenaWindow addGestureRecognizer:tap];
-      	[audioPlayer play];
 
-        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:nil];
-        audioPlayer.numberOfLoops = 0;
-        audioPlayer.volume = 1;
+        //play cena sound
+        player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:nil];
+        player.numberOfLoops = 0;
+        player.volume = 1;
+        [player play];
 
 
         [event setHandled:YES];
@@ -69,23 +56,7 @@
       }
 
 
-
-
-      //remove Cena from screen function
-      - (void)noMoreCena {
-        cenaWindow.alpha = 0;
-        cenaImage.alpha = 0;
-        [cenaWindow removeFromSuperview];
-        [cenaImage removeFromSuperview];
-        [audioPlayer stop];
-      }
-
-
-
-
-
-      //Activator labels and so on...
-
+      //remaining things for activator
       - (NSString *)activator:(LAActivator *)activator requiresLocalizedTitleForListenerName:(NSString *)listenerName {
       	return @"Superslam12";
       }
@@ -99,9 +70,19 @@
 
 
       + (void)load {
-      	[[LAActivator sharedInstance] registerListener:[self new] forName:@"com.sh0rtflow.Superslam12"];
+      	[[LAActivator sharedInstance] registerListener:[self new] forName:@"me.memor1es.superslam12"];
       }
 
+
+      //function to hide cena and stop audio
+      - (void)noMoreCena {
+        cenaWindow.alpha = 0;
+        cenaImage.alpha = 0;
+        [cenaWindow removeFromSuperview];
+        [cenaImage removeFromSuperview];
+
+        [player stop];
+      }
 
 
 
